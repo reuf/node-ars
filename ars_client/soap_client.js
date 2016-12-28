@@ -4,7 +4,7 @@ var http = require('http')
 var soap = require('strong-soap').soap
 var fs  = require('fs')
 var urls = require('./urls')
-// var trans = require('./db')
+var trans = require('./db')
 var parseString = require('xml2js').parseString;
 const errors = []
 
@@ -21,9 +21,9 @@ urls.forEach((url) => {
             body += chunk;
           })
           response.on('end', function () {
-            fs.writeFile('./res/' + wsdl, body, (err,data) => {
-              // trans(wsdl, body)
-            })
+            // fs.writeFile('./res/' + wsdl, body, (err,data) => {
+              trans(wsdl, body)
+            // })
           })
     })
   } catch(e) {

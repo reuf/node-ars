@@ -6,13 +6,13 @@ var http = require('http')
 var soap = require('strong-soap').soap
 var fs  = require('fs')
 var urls = require('./urls')
-// var trans = require('./db')
+var trans = require('./db')
 var parseString = require('xml2js').parseString
 
 new CronJob('0 */1 * * * *', function() {
 
-  var dir = './res/' + new Date().getTime()
-
+var stamp = new Date().getTime()
+var dir = './res/' + stamp
   mkdirp(dir, function (err) {
       if (err) console.error(err)
       else {
@@ -30,7 +30,7 @@ new CronJob('0 */1 * * * *', function() {
                 })
                 response.on('end', function () {
                   fs.writeFile(dir + '/' + wsdl, body, (err,data) => {
-                    // trans(wsdl, body)
+                    // trans(wsdl, body, stamp)
                   })
                 })
             })
