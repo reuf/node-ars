@@ -6,6 +6,7 @@ var fs  = require('fs')
 var urls = require('./urls')
 // var trans = require('./db')
 var parseString = require('xml2js').parseString;
+const errors = []
 
 urls.forEach((url) => {
   var body = ''
@@ -16,16 +17,16 @@ urls.forEach((url) => {
           path: url.path,
           agent: false
         }, (response) => {
-        response.on('data', function (chunk) {
-          body += chunk;
-        })
-        response.on('end', function () {
-          fs.writeFile('./res/' + wsdl, body, (err,data) => {
-            // trans(wsdl, body)
+          response.on('data', function (chunk) {
+            body += chunk;
           })
-        })
+          response.on('end', function () {
+            fs.writeFile('./res/' + wsdl, body, (err,data) => {
+              // trans(wsdl, body)
+            })
+          })
     })
   } catch(e) {
-    console.error(e)
+    console.error(e);
   }
 })

@@ -11,7 +11,6 @@ var parseString = require('xml2js').parseString
 
 new CronJob('0 */1 * * * *', function() {
 
-//--steps added for execution - start
   var dir = './res/' + new Date().getTime()
 
   mkdirp(dir, function (err) {
@@ -40,10 +39,7 @@ new CronJob('0 */1 * * * *', function() {
           }
         })
       }
-  });
-
-//--steps added for execution - end
-
+  })
 }, () => {
-  console.log('job executed successfully');
-}, true, 'America/Los_Angeles');
+  console.log('job executed successfully')
+}, true, 'America/Los_Angeles')
